@@ -663,8 +663,10 @@ namespace Discord
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options), "Options cannot be null!");
+            
+            Options ??= new List<SlashCommandOptionBuilder>();
 
-            if ((Options?.Count ?? 0) + options.Length > SlashCommandBuilder.MaxOptionsCount)
+            if (Options.Count + options.Length > SlashCommandBuilder.MaxOptionsCount)
                 throw new ArgumentOutOfRangeException(nameof(options), $"There can only be {SlashCommandBuilder.MaxOptionsCount} options per sub command group!");
 
             foreach (var option in options)
